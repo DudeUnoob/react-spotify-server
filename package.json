@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start":"npm start",
-    "build":"npm start"
+    "build":"node server.js"
   }
 }
