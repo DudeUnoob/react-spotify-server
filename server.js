@@ -17,7 +17,7 @@ app.get('/', (req,res) => {
 app.post("/login", (req, res) => {
   const code = req.body.code
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: `${serve}/dashboard`,
+    redirectUri: `https://reactspotify.vercel.app/dashboard`,
     clientId: '3a7cc4035bcb44618275ce790c0197fa',
     clientSecret: 'fa4f489c5d7540e98e05de61a62d21ec',
   })
@@ -39,7 +39,7 @@ app.post("/login", (req, res) => {
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: `${serve}/dashboard`,
+    redirectUri: `https://reactspotify.vercel.app/dashboard`,
     clientId: '3a7cc4035bcb44618275ce790c0197fa',
     clientSecret: 'fa4f489c5d7540e98e05de61a62d21ec',
     refreshToken,
