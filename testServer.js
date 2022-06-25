@@ -1,8 +1,8 @@
 let server = true;
 if(server === true){
-    server = "http://localhost:3001"
+    server = "http://localhost:3000"
 } else {
-    server = "https://react-spotifyserver.herokuapp.com"
+    server = "https://reactspotify.vercel.app"
 }
 
 module.exports = server;
