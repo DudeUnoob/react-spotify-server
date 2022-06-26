@@ -1,22 +1,33 @@
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
-const SpotifyWebApi = require("spotify-web-api-node")
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const SpotifyWebApi = require("spotify-web-api-node");
 require('dotenv').config();
-const app = express()
-app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+const cookieParser = require('cookie-parser');
+const app = express();
+const path = require("path")
+app.use(cors());
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true, limit:'512kb' }));
+app.use(express.static('public'))
+let service = true;
+if(service === true){
+  service = "http://localhost:3000"
+} else {
+  service = "https://reactspotify.vercel.app"
+}
 
 app.get('/', (req,res) => {
-  res.send("hello")
+  res.sendFile('index.html', { root: path.join(__dirname, './files') });
 })
 
 app.post("/login", (req, res) => {
   const code = req.body.code
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: `https://reactspotify.vercel.app/dashboard`,
+    redirectUri: `${service}/dashboard`,
     clientId: '3a7cc4035bcb44618275ce790c0197fa',
     clientSecret: 'fa4f489c5d7540e98e05de61a62d21ec',
   })
@@ -38,7 +49,7 @@ app.post("/login", (req, res) => {
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: `https://reactspotify.vercel.app/dashboard`,
+    redirectUri: `${service}/dashboard`,
     clientId: '3a7cc4035bcb44618275ce790c0197fa',
     clientSecret: 'fa4f489c5d7540e98e05de61a62d21ec',
     refreshToken,
