@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit:'512kb' }));
 app.use(express.static('public'))
-let service = true;
+let service = false;
 if(service === true){
   service = "http://localhost:3000"
 } else {
